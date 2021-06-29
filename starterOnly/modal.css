@@ -527,3 +527,7 @@ footer {
   }
 }
 
+.error {
+  font-size: 0.8rem;
+  color: #fe142f;
+}
