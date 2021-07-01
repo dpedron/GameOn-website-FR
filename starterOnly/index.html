@@ -69,9 +69,6 @@
                   type="text"
                   id="first"
                   name="first"
-                  pattern="[a-zA-Z]+"
-                  minlength="2"
-                  required
                 /><br>
                 <div id="firstError"></div>
               </div>
@@ -83,9 +80,6 @@
                   type="text"
                   id="last"
                   name="last"
-                  pattern="[a-zA-Z]+"
-                  minlength="2"
-                  required
                 /><br>
                 <div id="lastError"></div>
               </div>
@@ -97,8 +91,8 @@
                   type="email"
                   id="email"
                   name="email"
-                  required
                 /><br>
+                <div id="emailError"></div>
               </div>
               <div
                 class="formData">
@@ -108,8 +102,8 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required
                 /><br>
+                <div id="birthdateError"></div>
               </div>
               <div
                 class="formData">
@@ -121,10 +115,10 @@
                   name="quantity" 
                   min="0" 
                   max="99"
-                  required
                   />
+                  <div id="quantityError"></div>
               </div>
-              <p class="text-label">Quelles villes ?</p>
+              <p class="text-label">Quelle ville ?</p>
               <div
                 class="formData">
                 <input
@@ -193,6 +187,7 @@
                   <span class="checkbox-icon"></span>
                   Portland</label
                 >
+                <div id="locationError"></div>
               </div>
 
               <div
@@ -206,6 +201,7 @@
                 <label class="checkbox2-label" for="checkbox1" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et j'accepte les conditions d'utilisation.
+                  <div id="checkbox1Error"></div>
                 </label>
                 <br>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
@@ -221,6 +217,7 @@
                 class="button"
                 value="C'est parti"
               />
+              <div id="formulaireError"></div>
             </form>
           </div>
         </div>
