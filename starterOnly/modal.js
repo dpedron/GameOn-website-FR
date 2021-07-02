@@ -40,78 +40,93 @@ let twoCaracters = 'Veuillez saisir au moins deux caractères (lettres uniquemen
 let unvalidBrithdate = 'Veuillez saisir une date de naissance valide.';
 let unvalidEmail = 'Veuillez saisir une adresse mail valide (dupont@citron.com).';
 let uncheckedTerms = "L'acceptation des conditions d'utilisation est obligatoire.";
+let unvalidForm = "Veuillez corriger les erreurs signalées";
+
+// inputs tests
+let isOk = true;
+let regexName = /^[a-z ,.'-]{2,}$/i;
+let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+let regexDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 
 // first validation
 function firstValidation(){
-  let regex = /^[a-zA-Z]{2,}$/;
   let firstError = document.getElementById('firstError');
 
   first.addEventListener('change', function(){
     firstError.textContent = noProblem;
     if(!first.value){
       firstError.textContent = emptyField;
-      return (false);
+      isOk = false;
+      return false;
     }
-    if(!regex.test(first.value)){
+    if(!regexName.test(first.value)){
       firstError.textContent = twoCaracters;
-      return (false);
+      isOk = false;
+      return false;
     }    
+    isOk = true;
+    return true;
   })
-  return (true);
 };
 
 // last validation
 function lastValidation(){
-  let regex = /^[a-zA-Z]{2,}$/;
   let lastError = document.getElementById('lastError');
 
   last.addEventListener('change', function(){
     lastError.textContent = noProblem;
     if(!last.value){
       lastError.textContent = emptyField;
-      return (false);
+      isOk = false;
+      return false;
     }
-    if(!regex.test(last.value)){
+    if(!regexName.test(last.value)){
       lastError.textContent = twoCaracters;
-      return (false);
+      isOk = false;
+      return false;
     }
-    return (true);
+    isOk = true;
+    return true;
   })};
 
 // email validation
 function emailValidation(){
-  let regex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
   let emailError = document.getElementById('emailError');
 
   email.addEventListener('change', function(){
     emailError.textContent = noProblem;
     if(!email.value){
       emailError.textContent = emptyField;
-      return (false);
+      isOk = false;
+      return false;
     }
-    if(!regex.test(email.value)){
+    if(!regexEmail.test(email.value)){
       emailError.textContent = unvalidEmail;
-      return (false);
+      isOk = false;
+      return false;
     }
-    return (true);
+    isOk = true;
+    return true;
   })};
 
 // birthdate validation
 function birthdateValidation(){
-  let regex = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
   let birthdateError = document.getElementById('birthdateError');
 
   birthdate.addEventListener('change', function(){
     birthdateError.textContent = noProblem;
     if(!birthdate.value){
       birthdateError.textContent = emptyField;
-      return (false);
+      isOk = false;
+      return false;
     }
-    if(!regex.test(birthdate.value)){
+    if(!regexDate.test(birthdate.value)){
       birthdateError.textContent = unvalidBrithdate;
-      return (false);
+      isOk = false;
+      return false;
     }
-    return (true);
+    isOk = true;
+    return true;
   })};
 
 // quantity validation
@@ -122,10 +137,14 @@ function quantityValidation(){
     quantityError.textContent = noProblem;
     if(!quantity.value){
       quantityError.textContent = emptyField;
-      return (false);
+      isOk = false;
+      return false;
     }
-    return (true);
+    isOk = true;
+    return true;
   })};
+
+// location validation
   
 // terms and conditions acceptation
 function checkbox1Validation() {
@@ -134,19 +153,53 @@ function checkbox1Validation() {
   checkbox1.addEventListener('change', function(){
   if(checkbox1.checked){
     checkbox1Error.textContent = noProblem;
-    return (false);
-  } else {
+    isOk = false;
+    return false;
+  } 
+  if(!checkbox1.checked){
     checkbox1Error.textContent = uncheckedTerms;
-    return (false);
+    isOk = false;
+    return false;
   }
+  isOk = true;
+  return true;
 })};
 
 // form validation
 function validate() {
   formulaire.addEventListener('submit', function(e){
-    if(!(first.value)){
+    let formulaireError = document.getElementById('formulaireError');
+
+    if(isOk == false){
+      formulaireError.innerText = unvalidForm;
       e.preventDefault();
     }
+    if(!first.value){
+      formulaireError.innerText = unvalidForm;
+      firstError.textContent = emptyField;
+      e.preventDefault();
+    }
+    if(!last.value){
+      formulaireError.innerText = unvalidForm;
+      lastError.textContent = emptyField;
+      e.preventDefault();
+    }
+    if(!email.value){
+      formulaireError.innerText = unvalidForm;
+      emailError.textContent = emptyField;
+      e.preventDefault();
+    }
+    if(!birthdate.value){
+      formulaireError.innerText = unvalidForm;
+      birthdateError.textContent = emptyField;
+      e.preventDefault();
+    }
+    if(!quantity.value){
+      formulaireError.innerText = unvalidForm;
+      quantityError.textContent = emptyField;
+      e.preventDefault();
+    }
+
   });
 };
 
