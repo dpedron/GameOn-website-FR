@@ -18,6 +18,30 @@ let birthdate = document.getElementById('birthdate');
 let quantity = document.getElementById('quantity');
 let checkbox1 = document.getElementById('checkbox1');
 let formulaire = document.getElementById('formulaire');
+let content = document.querySelector('.content');
+let validation = document.querySelector('.validation');
+let firstError = document.getElementById('firstError');
+let lastError = document.getElementById('lastError');
+let emailError = document.getElementById('emailError');
+let birthdateError = document.getElementById('birthdateError');
+let quantityError = document.getElementById('quantityError');
+let checkbox1Error = document.getElementById('checkbox1Error');
+let formulaireError = document.getElementById('formulaireError');
+
+// inputs errors
+let noProblem = '';
+let unvalidName = 'Veuillez remplir le champ ci-dessus avec deux caractères au moins';
+let unvalidEmail = 'Veuillez saisir une adresse mail valide (dupont@citron.com)';
+let unvalidBirthdate = 'Veuillez saisir une date de naissance valide';
+let unvalidQuantity = "Veuillez sélectionner un nombre";
+let uncheckedLocation = 'Veuillez sélectionner une ville';
+let uncheckedTerms = "L'acceptation des conditions d'utilisation est obligatoire";
+let unvalidForm = "Veuillez corriger les erreurs signalées";
+
+// inputs tests
+let regexName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}$/u;
+let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+let regexDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 
 // launch modal form
 function launchModal() {
@@ -32,181 +56,123 @@ document.querySelector(".close").addEventListener("click", function(){
   modalbg.style.display = "none";
 });
 
-
-// inputs errors
-let noProblem = '';
-let emptyField = 'Veuillez remplir le champ ci-dessus.';
-let twoCaracters = 'Veuillez saisir au moins deux caractères (lettres uniquement).';
-let unvalidBrithdate = 'Veuillez saisir une date de naissance valide.';
-let unvalidEmail = 'Veuillez saisir une adresse mail valide (dupont@citron.com).';
-let uncheckedTerms = "L'acceptation des conditions d'utilisation est obligatoire.";
-let unvalidForm = "Veuillez corriger les erreurs signalées";
-
-// inputs tests
-let isOk = true;
-let regexName = /^[a-z ,.'-]{2,}$/i;
-let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-let regexDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
-
 // first validation
 function firstValidation(){
-  let firstError = document.getElementById('firstError');
-
-  first.addEventListener('change', function(){
     firstError.textContent = noProblem;
-    if(!first.value){
-      firstError.textContent = emptyField;
-      isOk = false;
-      return false;
-    }
-    if(!regexName.test(first.value)){
-      firstError.textContent = twoCaracters;
-      isOk = false;
+    if(!first.value || !regexName.test(first.value)){
+      first.style.border = "2px solid #FF4E60";
+      firstError.textContent = unvalidName;
       return false;
     }    
-    isOk = true;
     return true;
-  })
 };
 
 // last validation
 function lastValidation(){
-  let lastError = document.getElementById('lastError');
-
-  last.addEventListener('change', function(){
     lastError.textContent = noProblem;
-    if(!last.value){
-      lastError.textContent = emptyField;
-      isOk = false;
+    if(!last.value || !regexName.test(last.value)){
+      last.style.border = "2px solid #FF4E60";
+      lastError.textContent = unvalidName;
       return false;
     }
-    if(!regexName.test(last.value)){
-      lastError.textContent = twoCaracters;
-      isOk = false;
-      return false;
-    }
-    isOk = true;
     return true;
-  })};
+  };
 
 // email validation
 function emailValidation(){
-  let emailError = document.getElementById('emailError');
-
-  email.addEventListener('change', function(){
     emailError.textContent = noProblem;
-    if(!email.value){
-      emailError.textContent = emptyField;
-      isOk = false;
-      return false;
-    }
-    if(!regexEmail.test(email.value)){
+    if(!email.value || !regexEmail.test(email.value)){      
+      email.style.border = "2px solid #FF4E60";
       emailError.textContent = unvalidEmail;
-      isOk = false;
       return false;
     }
-    isOk = true;
     return true;
-  })};
+  };
 
 // birthdate validation
 function birthdateValidation(){
-  let birthdateError = document.getElementById('birthdateError');
-
-  birthdate.addEventListener('change', function(){
     birthdateError.textContent = noProblem;
-    if(!birthdate.value){
-      birthdateError.textContent = emptyField;
-      isOk = false;
+    if(!birthdate.value || !regexDate.test(birthdate.value)){      
+      birthdate.style.border = "2px solid #FF4E60";
+      birthdateError.textContent = unvalidBirthdate;
       return false;
     }
-    if(!regexDate.test(birthdate.value)){
-      birthdateError.textContent = unvalidBrithdate;
-      isOk = false;
-      return false;
-    }
-    isOk = true;
     return true;
-  })};
+  };
 
 // quantity validation
 function quantityValidation(){
-  let quantityError = document.getElementById('quantityError');
-
-  quantity.addEventListener('change', function(){
     quantityError.textContent = noProblem;
     if(!quantity.value){
-      quantityError.textContent = emptyField;
-      isOk = false;
+      quantity.style.border = "2px solid #FF4E60";
+      quantityError.textContent = unvalidQuantity;
       return false;
     }
-    isOk = true;
     return true;
-  })};
+  };
 
 // location validation
+
+/* function locationValidation(){
+  let location = document.getElementsByName('location');
+  let locationError = document.getElementsById('locationError');
+    for(let i = 0; i<location.length; i++){
+      if(location[i].checked){
+        window.alert("echec");
+        locationError.innerText = uncheckedLocation;
+        return false;
+      }
+      return true;
+    }
+} */
   
 // terms and conditions acceptation
 function checkbox1Validation() {
-  let checkbox1Error = document.getElementById('checkbox1Error');
-
-  checkbox1.addEventListener('change', function(){
-  if(checkbox1.checked){
-    checkbox1Error.textContent = noProblem;
-    isOk = false;
-    return false;
-  } 
+  checkbox1Error.textContent = noProblem;
   if(!checkbox1.checked){
     checkbox1Error.textContent = uncheckedTerms;
-    isOk = false;
     return false;
   }
-  isOk = true;
   return true;
-})};
-
-// form validation
-function validate() {
-  formulaire.addEventListener('submit', function(e){
-    let formulaireError = document.getElementById('formulaireError');
-
-    if(isOk == false){
-      formulaireError.innerText = unvalidForm;
-      e.preventDefault();
-    }
-    if(!first.value){
-      formulaireError.innerText = unvalidForm;
-      firstError.textContent = emptyField;
-      e.preventDefault();
-    }
-    if(!last.value){
-      formulaireError.innerText = unvalidForm;
-      lastError.textContent = emptyField;
-      e.preventDefault();
-    }
-    if(!email.value){
-      formulaireError.innerText = unvalidForm;
-      emailError.textContent = emptyField;
-      e.preventDefault();
-    }
-    if(!birthdate.value){
-      formulaireError.innerText = unvalidForm;
-      birthdateError.textContent = emptyField;
-      e.preventDefault();
-    }
-    if(!quantity.value){
-      formulaireError.innerText = unvalidForm;
-      quantityError.textContent = emptyField;
-      e.preventDefault();
-    }
-
-  });
 };
 
-firstValidation();
-lastValidation();
-emailValidation();
-birthdateValidation();
-quantityValidation();
-checkbox1Validation();
+// form validation
+function validate(){  
+  formulaire.addEventListener('submit', function(e){
+    let isOk = true;
+    if(firstValidation()==false){
+      isOk = false;
+    }
+    if(lastValidation()==false){
+      isOk = false;
+    }
+    if(emailValidation()==false){
+      isOk = false;
+    }
+    if(birthdateValidation()==false){
+      isOk = false;
+    }
+    if(quantityValidation()==false){
+      isOk = false;
+    }
+    if(checkbox1Validation()==false){
+      isOk = false;
+    }
+    if(isOk == false){
+      e.preventDefault();
+      formulaireError.innerText = unvalidForm;
+    } else {
+      e.preventDefault(); 
+      content.style.display = "none";
+      validation.style.display = "block";
+    }
+  })
+};
+
+first.addEventListener('change', firstValidation);
+last.addEventListener('change', lastValidation);
+email.addEventListener('change', emailValidation);
+birthdate.addEventListener('change', birthdateValidation);
+quantity.addEventListener('change', quantityValidation);
+checkbox1.addEventListener('change', checkbox1Validation);
 validate();

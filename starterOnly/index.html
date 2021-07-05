@@ -58,6 +58,7 @@
               name="reserve"
               action="index.html"
               method="get"
+              novalidate
               onsubmit="return validate();"
               id="formulaire"
             >
@@ -112,7 +113,7 @@
                   type="number" 
                   class="text-control" 
                   id="quantity" 
-                  name="quantity" 
+                  name="quantity"
                   min="0" 
                   max="99"
                   />
@@ -212,14 +213,23 @@
                 <br>
               </div>
               <input 
-                class="btn-submit"
+                class="button btn-submit"
                 type="submit"
-                class="button"
                 value="C'est parti"
               />
-              <div id="formulaireError" class="error"></div>
+              <div id="formulaireError" class="error"></div>              
             </form>
+            </div>
           </div>
+          <div class="validation">
+            <span class="close"></span>
+            <p>Merci !<br>
+              Votre réservation a été reçue.</p>
+            <input 
+              class="button btn-submit"
+              type="button"
+              value="Fermer"
+            />
         </div>
       </div>
     </main>
