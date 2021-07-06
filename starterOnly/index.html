@@ -14,7 +14,7 @@
   <body>
     <header class="topnav" id="myTopnav">
       <div class="header-logo">
-        <img alt="logo" src="Logo.png" width="auto" height="auto" />
+        <img alt="logo" src="Logo.png" />
       </div>
       <div class="main-navbar">      
         <a href="#" class="active"><span>Accueil</span></a>
@@ -51,7 +51,7 @@
       </section>
 
       <div class="bground">
-        <div class="content">
+        <div class="content" id="modalContent">
           <span class="close"></span>
           <div class="modal-body">
             <form
@@ -119,7 +119,7 @@
                   />
                   <div id="quantityError" class="error"></div>
               </div>
-              <p class="text-label">Quelle ville ?</p>
+              <p class="text-label">Dans quelle ville ?</p>
               <div
                 class="formData">
                 <input
@@ -199,12 +199,12 @@
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et j'accepte les conditions d'utilisation.
-                  <div id="checkbox1Error" class="error"></div>
                 </label>
                 <br>
+                <div id="checkbox1Error" class="error"></div>
                 <input class="checkbox-input" type="checkbox" id="checkbox2" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
@@ -221,8 +221,8 @@
             </form>
             </div>
           </div>
-          <div class="validation">
-            <span class="close"></span>
+          <div id="validation">
+            <span class="close closeValidation"></span>
             <p>Merci !<br>
               Votre réservation a été reçue.</p>
             <input 

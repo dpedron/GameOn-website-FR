@@ -18,8 +18,8 @@ let birthdate = document.getElementById('birthdate');
 let quantity = document.getElementById('quantity');
 let checkbox1 = document.getElementById('checkbox1');
 let formulaire = document.getElementById('formulaire');
-let content = document.querySelector('.content');
-let validation = document.querySelector('.validation');
+let modalContent = document.getElementById('modalContent');
+let validation = document.getElementById('validation');
 let firstError = document.getElementById('firstError');
 let lastError = document.getElementById('lastError');
 let emailError = document.getElementById('emailError');
@@ -39,7 +39,7 @@ let uncheckedTerms = "L'acceptation des conditions d'utilisation est obligatoire
 let unvalidForm = "Veuillez corriger les erreurs signalées";
 
 // inputs tests
-let regexName = /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]{2,}$/u;
+let regexName = /^[A-ZÀÈÉÊ][a-zàäâéêèëçôîùû\-'\s]+$/;
 let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 let regexDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/;
 
@@ -53,7 +53,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // close modal event
 document.querySelector(".close").addEventListener("click", function(){
-  modalbg.style.display = "none";
+  modalbg.style.display = "";
 });
 
 // first validation
@@ -64,6 +64,7 @@ function firstValidation(){
       firstError.textContent = unvalidName;
       return false;
     }    
+    first.style.border = "none";
     return true;
 };
 
@@ -74,7 +75,8 @@ function lastValidation(){
       last.style.border = "2px solid #FF4E60";
       lastError.textContent = unvalidName;
       return false;
-    }
+    }    
+    last.style.border = "none";
     return true;
   };
 
@@ -85,7 +87,8 @@ function emailValidation(){
       email.style.border = "2px solid #FF4E60";
       emailError.textContent = unvalidEmail;
       return false;
-    }
+    }        
+    email.style.border = "none";
     return true;
   };
 
@@ -96,7 +99,8 @@ function birthdateValidation(){
       birthdate.style.border = "2px solid #FF4E60";
       birthdateError.textContent = unvalidBirthdate;
       return false;
-    }
+    }    
+    birthdate.style.border = "none";
     return true;
   };
 
@@ -107,14 +111,15 @@ function quantityValidation(){
       quantity.style.border = "2px solid #FF4E60";
       quantityError.textContent = unvalidQuantity;
       return false;
-    }
+    }        
+    quantity.style.border = "none";
     return true;
   };
 
 // location validation
 
 /* function locationValidation(){
-  let location = document.getElementsByName('location');
+  let city = formulaire.location;
   let locationError = document.getElementsById('locationError');
     for(let i = 0; i<location.length; i++){
       if(location[i].checked){
@@ -137,7 +142,9 @@ function checkbox1Validation() {
 };
 
 // form validation
-function validate(){  
+
+function validate(){
+  
   formulaire.addEventListener('submit', function(e){
     let isOk = true;
     if(firstValidation()==false){
@@ -162,9 +169,9 @@ function validate(){
       e.preventDefault();
       formulaireError.innerText = unvalidForm;
     } else {
-      e.preventDefault(); 
-      content.style.display = "none";
+      e.preventDefault();
       validation.style.display = "block";
+      modalContent.style.display = "none";
     }
   })
 };
