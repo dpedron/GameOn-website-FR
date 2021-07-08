@@ -132,15 +132,14 @@ function quantityValidation(){
 
 // location validation
 function locationValidation(){
-    for(let i = 0; i < city.length; i++){ // check if one of the cities is checked
-      console.log(i);
+    for(let i = 0; i < city.length; i++){ // check if one of the cities is checked   
       if(city[i].checked){
         cityError.textContent = noProblem;
         return true;
       }
-      cityError.textContent = uncheckedCity; // error -> error message under checkboxes
-      return false;
   }
+  cityError.textContent = uncheckedCity; // error -> error message under checkboxes
+  return false;
 }
 
 // terms and conditions acceptation
@@ -194,5 +193,7 @@ last.addEventListener('change', lastValidation);
 email.addEventListener('change', emailValidation);
 birthdate.addEventListener('change', birthdateValidation);
 quantity.addEventListener('change', quantityValidation);
-city[0].addEventListener('change', locationValidation);
+city.forEach(element => {
+  element.addEventListener('change', locationValidation);
+});
 checkbox1.addEventListener('change', checkbox1Validation);
