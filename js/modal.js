@@ -32,7 +32,7 @@ let formulaireError = document.getElementById('formulaireError');
 
 // messages errors inputs
 let noProblem = '';
-let unvalidName = "Veuillez remplir le champ ci-dessus (une majuscule suivie d'un caractères au moins)"; // First and last name input error message
+let unvalidName = "Veuillez remplir le champ ci-dessus (deux caractères au moins)"; // First and last name input error message
 let unvalidEmail = 'Veuillez saisir une adresse mail valide (dupont@citron.com)'; // Email input error message
 let unvalidBirthdate = 'Veuillez saisir une date de naissance valide'; // Birthdate input error message
 let unvalidQuantity = "Veuillez sélectionner un nombre"; // Tournament number input error message
@@ -41,9 +41,9 @@ let uncheckedTerms = "L'acceptation des conditions d'utilisation est obligatoire
 let unvalidForm = "Veuillez corriger les erreurs signalées"; // Form input error message
 
 // inputs tests
-let regexName = /^[A-ZÀÈÉÊ][a-zàäâéêèëçôîùû\-'\s]+$/; // First and last name input validation test
+let regexName = /^[A-ZÀÈÉÊa-zàäâéêèëçôîùû][A-ZÀÈÉÊa-zàäâéêèëçôîùû\-'\s]+$/; // First and last name input validation test
 let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; // Email input validation test
-let regexDate = /^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$/; // Birthdate input validation test
+let regexDate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/; // Birthdate input validation test
 
 // launch modal form
 function launchModal() {
@@ -67,8 +67,6 @@ document.getElementById("closeValidationByCross").addEventListener("click", func
 document.getElementById("closeValidationByBtn").addEventListener("click", function(){
   modalbg.style.display = "";
 }); // by clicking on the button "fermer"
-
-
 
 // first validation
 function firstValidation(){
