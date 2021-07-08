@@ -74,74 +74,75 @@ document.getElementById("closeValidationByBtn").addEventListener("click", functi
 function firstValidation(){
     firstError.textContent = noProblem;
     if(!first.value || !regexName.test(first.value)){ // check if empty field or unvalid regex of first name
-      first.style.border = "2px solid #FF4E60"; // error -> add border to input field
+      first.style.border = "2px solid #FF4E60"; // error -> add borders to input field
       firstError.textContent = unvalidName; // error -> error message under input field
       return false;
     }    
     first.style.border = "none"; // no error -> do nothing
     return true;
-};
+}
 
 // last validation
 function lastValidation(){
     lastError.textContent = noProblem;
     if(!last.value || !regexName.test(last.value)){ // check if empty field or unvalid regex of last name
-      last.style.border = "2px solid #FF4E60"; // error -> add border to input field
+      last.style.border = "2px solid #FF4E60"; // error -> add borders to input field
       lastError.textContent = unvalidName; // error -> error message under input field
       return false;
     }    
     last.style.border = "none"; // no error -> do nothing
     return true;
-  };
+  }
 
 // email validation
 function emailValidation(){
     emailError.textContent = noProblem;
     if(!email.value || !regexEmail.test(email.value)){ // check if empty field or unvalid regex of email
-      email.style.border = "2px solid #FF4E60"; // error -> add border to input field
+      email.style.border = "2px solid #FF4E60"; // error -> add borders to input field
       emailError.textContent = unvalidEmail; // error -> error message under input field
       return false;
     }        
     email.style.border = "none"; // no error -> do nothing
     return true;
-  };
+  }
 
 // birthdate validation
 function birthdateValidation(){
     birthdateError.textContent = noProblem;
     if(!birthdate.value || !regexDate.test(birthdate.value)){ // check if empty field or unvalid regex of birthdate
-      birthdate.style.border = "2px solid #FF4E60"; // error -> add border to input field
+      birthdate.style.border = "2px solid #FF4E60"; // error -> add borders to input field
       birthdateError.textContent = unvalidBirthdate; // error -> error message under input field
       return false;
     }     
     birthdate.style.border = "none"; // no error -> do nothing
     return true;
-  };
+  }
 
 // quantity validation
 function quantityValidation(){
     quantityError.textContent = noProblem;
     if(!quantity.value){ // check if empty field
-      quantity.style.border = "2px solid #FF4E60"; // error -> add border to input field
+      quantity.style.border = "2px solid #FF4E60"; // error -> add borders to input field
       quantityError.textContent = unvalidQuantity; // error -> error message under input field
       return false;
     }        
     quantity.style.border = "none"; // no error -> do nothing
     return true;
-  };
+  }
 
 // location validation
 function locationValidation(){
-    for(let i = 0; i<city.length; i++){ // check if one of the cities is checked
-      if(!city[i].checked){
-        cityError.textContent = uncheckedCity; // error -> error message under checkboxes
-        return false;
+    for(let i = 0; i < city.length; i++){ // check if one of the cities is checked
+      console.log(i);
+      if(city[i].checked){
+        cityError.textContent = noProblem;
+        return true;
       }
-      cityError.textContent = "";
-      return true; // no error -> do nothing
-    }
+      cityError.textContent = uncheckedCity; // error -> error message under checkboxes
+      return false;
+  }
 }
-  
+
 // terms and conditions acceptation
 function checkbox1Validation() {
   checkbox1Error.textContent = noProblem;
@@ -150,46 +151,43 @@ function checkbox1Validation() {
     return false;
   }
   return true; // no error -> do nothing
-};
+}
 
 // form validation
-
 function validate(){
-  
-  formulaire.addEventListener('submit', function(e){ // check if there is any error on a input
-    let isOk = true;
-    if(firstValidation()==false){
-      isOk = false;
-    }
-    if(lastValidation()==false){
-      isOk = false;
-    }
-    if(emailValidation()==false){
-      isOk = false;
-    }
-    if(birthdateValidation()==false){ // error -> show error(s) on the input(s) concerned
-      isOk = false;
-    }
-    if(quantityValidation()==false){
-      isOk = false;
-    }
-    if(locationValidation()==false){
-      isOk = false;
-    }
-    if(checkbox1Validation()==false){
-      isOk = false;
-    }
-    if(isOk == false){
-      e.preventDefault();
-      formulaireError.innerText = unvalidForm; // error -> error message under submit button
-    } else {
-      formulaireError.innerText = "";
-      e.preventDefault();
-      validation.style.display = "block"; // no error -> close modal and open validation window
-      modalContent.style.display = "none"; 
-    }
-  })
-};
+  formulaireError.textContent = noProblem;
+  let isOk = true;
+                                // check if there is any error on a input
+  if(firstValidation()==false){
+    isOk = false;
+  }
+  if(lastValidation()==false){
+    isOk = false;
+  }
+  if(emailValidation()==false){
+    isOk = false;
+  }
+  if(birthdateValidation()==false){ // error -> show error(s) on the input(s) concerned
+    isOk = false;
+  }
+  if(quantityValidation()==false){
+    isOk = false;
+  }
+  if(locationValidation()==false){
+    isOk = false;
+  }
+  if(checkbox1Validation()==false){
+    isOk = false;
+  }
+  if(!isOk){
+    formulaireError.textContent = unvalidForm; // error -> error message under submit button
+    return false;
+  } else {
+    validation.style.display = "block"; // no error -> close modal and open validation window
+    modalContent.style.display = "none";
+    return false;
+  }
+}
 
 first.addEventListener('change', firstValidation);
 last.addEventListener('change', lastValidation);
@@ -198,4 +196,3 @@ birthdate.addEventListener('change', birthdateValidation);
 quantity.addEventListener('change', quantityValidation);
 city[0].addEventListener('change', locationValidation);
 checkbox1.addEventListener('change', checkbox1Validation);
-validate();
