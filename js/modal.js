@@ -42,7 +42,7 @@ let unvalidForm = "Veuillez corriger les erreurs signalées"; // Form input erro
 
 // inputs tests
 let regexName = /^[A-ZÀÈÉÊa-zàäâéêèëçôîùû][A-ZÀÈÉÊa-zàäâéêèëçôîùû\-'\s]+$/; // First and last name input validation test
-let regexEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; // Email input validation test
+let regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Email input validation test
 let regexDate = /^(19|20)\d{2}[-](0?[1-9]|1[012])[-](0[1-9]|[12]\d|3[01])$/; // Birthdate input validation test
 
 // launch modal form
